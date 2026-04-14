@@ -1,0 +1,124 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "_comment": "글로벌 기본 권한. 프로젝트 .claude/settings.json이 있으면 병합되고 프로젝트 쪽이 우선.",
+
+  "permissions": {
+    "allow": [
+      "Bash(ls:*)",
+      "Bash(pwd)",
+      "Bash(cat:*)",
+      "Bash(head:*)",
+      "Bash(tail:*)",
+      "Bash(grep:*)",
+      "Bash(rg:*)",
+      "Bash(find:*)",
+      "Bash(tree:*)",
+      "Bash(wc:*)",
+      "Bash(diff:*)",
+      "Bash(stat:*)",
+
+      "Bash(git status:*)",
+      "Bash(git log:*)",
+      "Bash(git diff:*)",
+      "Bash(git show:*)",
+      "Bash(git branch:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git stash:*)",
+      "Bash(git pull:*)",
+      "Bash(git fetch:*)",
+      "Bash(git checkout:*)",
+      "Bash(git restore:*)",
+      "Bash(git switch:*)",
+
+      "Bash(gh pr view:*)",
+      "Bash(gh pr list:*)",
+      "Bash(gh pr diff:*)",
+      "Bash(gh issue view:*)",
+      "Bash(gh issue list:*)",
+      "Bash(gh repo view:*)",
+      "Bash(gh api:*)",
+
+      "Bash(node:*)",
+      "Bash(npx --version)",
+      "Bash(npm --version)",
+      "Bash(pnpm --version)",
+      "Bash(yarn --version)",
+      "Bash(python:*)",
+      "Bash(python3:*)",
+
+      "Read(**)",
+      "Glob(**)",
+      "Grep(**)"
+    ],
+
+    "deny": [
+      "Bash(rm -rf /*)",
+      "Bash(rm -rf ~)",
+      "Bash(rm -rf ~/*)",
+      "Bash(sudo:*)",
+      "Bash(chmod 777:*)",
+      "Bash(chown:*)",
+
+      "Bash(git push --force:*)",
+      "Bash(git push -f:*)",
+      "Bash(git push --force-with-lease origin main:*)",
+      "Bash(git push --force-with-lease origin master:*)",
+      "Bash(git reset --hard origin/main)",
+      "Bash(git reset --hard origin/master)",
+      "Bash(git branch -D main)",
+      "Bash(git branch -D master)",
+      "Bash(git clean -fdx)",
+
+      "Bash(gh auth login:*)",
+      "Bash(gh auth token)",
+
+      "Bash(curl:* | bash)",
+      "Bash(curl:* | sh)",
+      "Bash(wget:* | bash)",
+      "Bash(wget:* | sh)",
+
+      "Read(**/.env)",
+      "Read(**/.env.*)",
+      "Read(**/.env.local)",
+      "Read(**/id_rsa)",
+      "Read(**/id_ed25519)",
+      "Read(**/*.pem)",
+      "Read(**/*.key)",
+      "Read(**/secrets/**)",
+      "Read(**/credentials/**)",
+      "Read(~/.ssh/**)",
+      "Read(~/.aws/**)",
+      "Read(~/.gnupg/**)"
+    ],
+
+    "ask": [
+      "Bash(npm install:*)",
+      "Bash(pnpm add:*)",
+      "Bash(yarn add:*)",
+      "Bash(pip install:*)",
+      "Bash(brew install:*)",
+
+      "Bash(git push:*)",
+      "Bash(git merge:*)",
+      "Bash(git rebase:*)",
+      "Bash(git reset:*)",
+      "Bash(gh pr create:*)",
+      "Bash(gh pr merge:*)",
+      "Bash(gh release create:*)",
+
+      "Write(**/CLAUDE.md)",
+      "Write(**/.gitignore)",
+      "Write(**/package.json)",
+      "Write(**/tsconfig.json)",
+      "Edit(**/CLAUDE.md)",
+      "Edit(**/.gitignore)",
+      "Edit(**/package.json)",
+      "Edit(**/tsconfig.json)"
+    ]
+  },
+
+  "env": {
+    "CLAUDE_SHELL_TIMEOUT_MS": "120000"
+  }
+}
