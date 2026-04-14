@@ -1,0 +1,47 @@
+{
+  "_comment": "Next.js 프로젝트용 MCP. 개인 토큰은 환경변수로만.",
+  "mcpServers": {
+    "filesystem": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-filesystem", "${workspaceFolder}"]
+    },
+    "github": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-github"],
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "${env:GITHUB_TOKEN}"
+      }
+    },
+    "postgres": {
+      "_note": "로컬/스테이징 DB의 스키마와 샘플 확인용. 반드시 읽기 전용 유저.",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-postgres",
+        "${env:DATABASE_URL_READONLY}"
+      ]
+    },
+    "playwright": {
+      "_note": "E2E 디버깅, 접근성 스냅샷, UI 자동화",
+      "command": "npx",
+      "args": ["-y", "@playwright/mcp@latest"]
+    },
+    "vercel": {
+      "_note": "배포/프리뷰/로그 조회. 공식 서버가 릴리스되면 교체 권장.",
+      "command": "npx",
+      "args": ["-y", "@vercel/mcp-adapter"],
+      "env": {
+        "VERCEL_TOKEN": "${env:VERCEL_TOKEN}"
+      }
+    },
+    "sentry": {
+      "_note": "프로덕션 에러를 바로 확인",
+      "command": "npx",
+      "args": ["-y", "@sentry/mcp-server"],
+      "env": {
+        "SENTRY_AUTH_TOKEN": "${env:SENTRY_AUTH_TOKEN}",
+        "SENTRY_ORG": "${env:SENTRY_ORG}"
+      }
+    }
+  }
+}

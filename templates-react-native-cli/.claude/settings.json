@@ -1,0 +1,115 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "_comment": "React Native CLI 프로젝트용. 팀 공용이면 커밋. 개인용은 .claude/settings.local.json 에.",
+
+  "permissions": {
+    "allow": [
+      "Bash(npm run typecheck)",
+      "Bash(npm run lint:*)",
+      "Bash(npm run test:*)",
+      "Bash(npm run start:*)",
+      "Bash(npm start:*)",
+      "Bash(npm run ios:*)",
+      "Bash(npm run android:*)",
+      "Bash(npx react-native:*)",
+      "Bash(npx pod-install:*)",
+      "Bash(watchman watch-del-all)",
+      "Bash(adb devices)",
+      "Bash(adb logcat:*)",
+      "Bash(xcrun simctl list:*)",
+      "Bash(xcrun simctl spawn booted log:*)",
+      "Bash(cd ios && bundle exec pod install)",
+      "Bash(cd ios && bundle install)",
+      "Bash(cd android && ./gradlew clean)",
+      "Bash(cd android && ./gradlew assembleDebug)",
+      "Bash(git status)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git checkout -b:*)",
+      "Read(**)",
+      "Edit(src/**)",
+      "Edit(__tests__/**)",
+      "Edit(e2e/**)",
+      "Edit(docs/**)",
+      "Edit(package.json)",
+      "Edit(babel.config.js)",
+      "Edit(metro.config.js)",
+      "Edit(tsconfig.json)",
+      "Edit(.eslintrc*)",
+      "Edit(.prettierrc*)",
+      "WebFetch(domain:reactnative.dev)",
+      "WebFetch(domain:reactnavigation.org)",
+      "WebFetch(domain:docs.expo.dev)",
+      "WebFetch(domain:docs.anthropic.com)"
+    ],
+    "deny": [
+      "Bash(rm -rf:*)",
+      "Bash(git push --force:*)",
+      "Bash(git push --force-with-lease:*)",
+      "Bash(git reset --hard:*)",
+      "Bash(npm publish:*)",
+      "Bash(curl:* | sh)",
+      "Bash(curl:* | bash)",
+      "Bash(cd android && ./gradlew bundleRelease:*)",
+      "Bash(cd android && ./gradlew assembleRelease:*)",
+      "Bash(cd ios && xcodebuild:* -configuration Release:*)",
+      "Bash(fastlane:*)",
+      "Edit(.env*)",
+      "Edit(**/google-services.json)",
+      "Edit(**/GoogleService-Info.plist)",
+      "Edit(android/app/**.keystore)",
+      "Edit(android/app/**.jks)",
+      "Edit(ios/**.mobileprovision)",
+      "Edit(ios/**.p12)",
+      "Edit(android/gradle.properties)",
+      "Read(.env*)",
+      "Read(**/credentials.json)",
+      "Read(**/*.keystore)",
+      "Read(**/*.jks)"
+    ],
+    "ask": [
+      "Bash(npm install:*)",
+      "Bash(npm ci)",
+      "Bash(npm uninstall:*)",
+      "Bash(yarn add:*)",
+      "Bash(git push:*)",
+      "Edit(ios/Podfile)",
+      "Edit(ios/**/Info.plist)",
+      "Edit(android/app/build.gradle)",
+      "Edit(android/build.gradle)",
+      "Edit(android/app/src/main/AndroidManifest.xml)",
+      "Edit(android/settings.gradle)"
+    ]
+  },
+
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [[ \"$CLAUDE_FILE_PATH\" =~ \\.(ts|tsx|js|jsx|json)$ ]]; then npx prettier --write \"$CLAUDE_FILE_PATH\" 2>/dev/null || true; fi"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "npm run typecheck --silent 2>&1 | tail -30 || true"
+          }
+        ]
+      }
+    ]
+  },
+
+  "env": {
+    "NODE_ENV": "development",
+    "RCT_NEW_ARCH_ENABLED": "0"
+  }
+}

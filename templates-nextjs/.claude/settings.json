@@ -1,0 +1,110 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "_comment": "Next.js 프로젝트용. 팀 공용이면 커밋. 개인용은 .claude/settings.local.json 에.",
+
+  "permissions": {
+    "allow": [
+      "Bash(npm run dev:*)",
+      "Bash(npm run typecheck)",
+      "Bash(npm run lint:*)",
+      "Bash(npm run format:*)",
+      "Bash(npm run test:*)",
+      "Bash(npm run build)",
+      "Bash(npx prisma generate)",
+      "Bash(npx prisma format)",
+      "Bash(npx prisma studio)",
+      "Bash(npx prisma migrate dev:*)",
+      "Bash(npx prisma db seed)",
+      "Bash(npx playwright test:*)",
+      "Bash(git status)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git checkout -b:*)",
+      "Read(**)",
+      "Edit(app/**)",
+      "Edit(src/**)",
+      "Edit(prisma/schema.prisma)",
+      "Edit(prisma/seed.ts)",
+      "Edit(__tests__/**)",
+      "Edit(tests/**)",
+      "Edit(e2e/**)",
+      "Edit(docs/**)",
+      "Edit(public/**)",
+      "Edit(package.json)",
+      "Edit(tsconfig.json)",
+      "Edit(next.config.*)",
+      "Edit(tailwind.config.*)",
+      "Edit(postcss.config.*)",
+      "Edit(.eslintrc*)",
+      "Edit(.prettierrc*)",
+      "WebFetch(domain:nextjs.org)",
+      "WebFetch(domain:react.dev)",
+      "WebFetch(domain:vercel.com)",
+      "WebFetch(domain:tailwindcss.com)",
+      "WebFetch(domain:ui.shadcn.com)",
+      "WebFetch(domain:tanstack.com)",
+      "WebFetch(domain:authjs.dev)",
+      "WebFetch(domain:www.prisma.io)",
+      "WebFetch(domain:docs.anthropic.com)"
+    ],
+    "deny": [
+      "Bash(rm -rf:*)",
+      "Bash(git push --force:*)",
+      "Bash(git push --force-with-lease:*)",
+      "Bash(git reset --hard:*)",
+      "Bash(npm publish:*)",
+      "Bash(curl:* | sh)",
+      "Bash(curl:* | bash)",
+      "Bash(npx prisma migrate reset:*)",
+      "Bash(npx prisma migrate deploy:*)",
+      "Bash(vercel deploy:*)",
+      "Bash(vercel --prod:*)",
+      "Edit(.env)",
+      "Edit(.env.local)",
+      "Edit(.env.production)",
+      "Edit(prisma/migrations/**)",
+      "Read(.env)",
+      "Read(.env.local)",
+      "Read(.env.production)"
+    ],
+    "ask": [
+      "Bash(npm install:*)",
+      "Bash(npm ci)",
+      "Bash(npm uninstall:*)",
+      "Bash(npx prisma migrate dev:*)",
+      "Bash(git push:*)",
+      "Edit(middleware.ts)",
+      "Edit(next.config.*)"
+    ]
+  },
+
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [[ \"$CLAUDE_FILE_PATH\" =~ \\.(ts|tsx|js|jsx|json|mjs|cjs|css)$ ]]; then npx prettier --write \"$CLAUDE_FILE_PATH\" 2>/dev/null || true; fi"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "npm run typecheck --silent 2>&1 | tail -30 || true"
+          }
+        ]
+      }
+    ]
+  },
+
+  "env": {
+    "NODE_ENV": "development"
+  }
+}

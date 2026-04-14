@@ -1,0 +1,33 @@
+{
+  "_comment": "React Native CLI 프로젝트용 MCP. 개인 토큰은 환경변수로만.",
+  "mcpServers": {
+    "filesystem": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-filesystem", "${workspaceFolder}"]
+    },
+    "github": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-github"],
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "${env:GITHUB_TOKEN}"
+      }
+    },
+    "sentry": {
+      "_note": "프로덕션 크래시/에러를 바로 확인 — 모바일은 Sentry 필수",
+      "command": "npx",
+      "args": ["-y", "@sentry/mcp-server"],
+      "env": {
+        "SENTRY_AUTH_TOKEN": "${env:SENTRY_AUTH_TOKEN}",
+        "SENTRY_ORG": "${env:SENTRY_ORG}"
+      }
+    },
+    "figma": {
+      "_note": "디자인 토큰/프레임을 코드로 옮길 때",
+      "command": "npx",
+      "args": ["-y", "figma-developer-mcp"],
+      "env": {
+        "FIGMA_API_KEY": "${env:FIGMA_TOKEN}"
+      }
+    }
+  }
+}

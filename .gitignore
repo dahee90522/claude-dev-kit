@@ -1,0 +1,27 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Editors
+.vscode/
+.idea/
+*.swp
+
+# Node (혹시 예시용으로 node 유틸 추가해서 쓸 경우)
+node_modules/
+.npm/
+npm-debug.log*
+
+# Env
+.env
+.env.local
+.env.*.local
+
+# Build artifacts
+build/
+dist/
+.next/
+out/
+
+# 임시/빌드 스크립트에서 생성되는 산출물 (필요 시)
+*.log
